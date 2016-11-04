@@ -1,0 +1,89 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+
+<Server port="8006" shutdown="stfdjfhdjgftr">
+  <Listener className="org.apache.catalina.startup.VersionLoggerListener" />
+ 
+  <!-- <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />-->
+  
+  <Listener className="org.apache.catalina.core.JasperListener" />
+  <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
+  <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
+  <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />
+
+  <GlobalNamingResources>
+    <Resource name="UserDatabase" auth="Container"
+              type="org.apache.catalina.UserDatabase"
+              description="User database that can be updated and saved"
+              factory="org.apache.catalina.users.MemoryUserDatabaseFactory"
+              pathname="conf/tomcat-users.xml" />
+  </GlobalNamingResources>
+
+  <!-- 服务一-->
+  <Service name="webApp_8081">
+
+    <Connector port="8081" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8447"  URIEncoding="UTF-8"  server="IIS 12.12" maxPostSize="83886080"/>    
+    <Engine name="webApp_8081" defaultHost="webApp_8081localhost">
+      <Realm className="org.apache.catalina.realm.LockOutRealm">
+     
+        <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
+               resourceName="UserDatabase"/>
+      </Realm>
+      <Host name="webApp_8081localhost"  appBase="webapps"
+            unpackWARs="false" autoDeploy="false">        
+        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+               prefix="localhost_access_log." suffix=".txt"
+               pattern="%h %l %u %t &quot;%r&quot; %s %b" />
+			   <Context docBase="D:\apache-tomcat-7.0.63\project_ws\Project1" path="/Project1" sessionCookieName="WeChatMonitorCookie_ws"/>	
+			   <Context docBase="D:\apache-tomcat-7.0.63\project4\Project2" path="/Project2"/>
+      </Host>
+    </Engine>
+  </Service>
+  <!-- 服务二-->
+  <Service name="webApp_8082">
+
+    <Connector port="8082" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8447"  URIEncoding="UTF-8"  server="IIS 12.12" maxPostSize="83886080"/>    
+    <Engine name="webApp_8082" defaultHost="webApp_8082localhost">
+      <Realm className="org.apache.catalina.realm.LockOutRealm">
+     
+        <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
+               resourceName="UserDatabase"/>
+      </Realm>
+      <Host name="webApp_8082localhost"  appBase="webapps"
+            unpackWARs="false" autoDeploy="false">        
+        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+               prefix="localhost_access_log." suffix=".txt"
+               pattern="%h %l %u %t &quot;%r&quot; %s %b" />
+			   <Context docBase="D:\apache-tomcat-7.0.63\project_wx\Project3" path="/Project3" sessionCookieName="WeChatMonitorCookie_wx"/>	
+      </Host>
+    </Engine>
+  </Service>
+  
+  <!--服务三-->
+  <Service name="webApp_8096">
+
+    <Connector port="8096" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8447"  URIEncoding="UTF-8"  server="IIS 12.12" maxPostSize="83886080"/>    
+    <Engine name="webApp_8096" defaultHost="webApp_8096localhost">
+      <Realm className="org.apache.catalina.realm.LockOutRealm">
+     
+        <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
+               resourceName="UserDatabase"/>
+      </Realm>
+      <Host name="webApp_8096localhost"  appBase="webapps"
+            unpackWARs="false" autoDeploy="false">        
+        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+               prefix="localhost_access_log." suffix=".txt"
+               pattern="%h %l %u %t &quot;%r&quot; %s %b" />
+			   <Context docBase="D:\apache-tomcat-7.0.63\project4\Project4" path="/Project4" sessionCookieName="VulnerabilityEngineCookie"/>	
+			   <!--服务器中图片路径映射-->
+			   <Context path="/picture" docBase="C:\picture" reloadable="true" />
+      </Host>
+    </Engine>
+  </Service>
+  
+</Server>
