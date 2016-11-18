@@ -1,0 +1,27 @@
+syntax = "proto3";
+package com.liyuanguo.qq.search;
+option java_outer_classname = "ServerMsg";
+message ServerMessage{
+	
+	oneof MessageType{
+	
+		ReceiveContent receive_content=1;//客户端发送抓取数据
+		GetData get_data=2;//客户端请求点数据
+	}
+	
+	
+	message ReceiveContent{
+	
+		int32 status=1;//用户状态
+		string beizhu=2;//备注
+		float distance=3;//距离
+		string userId=4;//用户id
+		string userName=5;//用户名
+	
+	}
+	
+	message GetData{
+		string userId=1;//用户id
+	}
+	
+}
